@@ -17,6 +17,10 @@ contract WhitelistHelper is ERC721 {
       _;
   }
 
+  function isWhitelisted() external view returns (bool) {
+      return _whitelist[msg.sender] > 0;
+  }
+
   function setWhitelistActive() external onlyOwner {
       _whitelistActive = true;
   }
