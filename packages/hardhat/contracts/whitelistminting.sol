@@ -12,7 +12,7 @@ contract WhitelistMinting is WhitelistHelper {
     isForSale(tokenURI)
     returns (uint)
   {
-      uint id = _updateInternalState(tokenURI);
+      uint id = _updateInternalStateForNewTokenId(tokenURI);
       _mint(msg.sender, id);
       _setTokenURI(id, tokenURI);
 
