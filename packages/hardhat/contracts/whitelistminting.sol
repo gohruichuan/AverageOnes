@@ -2,8 +2,6 @@ pragma solidity ^0.8.0;
 
 import "./WhitelistMintHelper.sol";
 
-// GET LISTED ON OPENSEA: https://testnets.opensea.io/get-listed/step-two
-
 contract WhitelistMinting is WhitelistHelper {
 
   function mintItem(string memory tokenURI) 
@@ -29,7 +27,7 @@ contract WhitelistMinting is WhitelistHelper {
   }
 
   function _updateInternalStateAfterMinting(string tokenURI) private {
-    bytes32 uriHash = keccak256(abi.encodePacked(tokenURI));
+    bytes32 uriHash = toURIHash(tokenURI);
     forSale[uriHash] = false;
     uriToTokenId[uriHash] = id;
     _decreaseMintCountOfMinterFromWhitelistAfterMinting();

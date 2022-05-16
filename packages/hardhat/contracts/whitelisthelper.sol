@@ -1,8 +1,8 @@
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./basecontracthelper.sol";
 
-contract WhitelistHelper is ERC721 {
+contract WhitelistHelper is BaseContractHelper {
 
   using SafeMath8 for uint8;
 
