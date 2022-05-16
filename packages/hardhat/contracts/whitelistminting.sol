@@ -12,14 +12,14 @@ contract WhitelistMinting is WhitelistHelper {
     isForSale(tokenURI)
     returns (uint)
   {
-      uint id = _updateInternalState();
+      uint id = _updateInternalState(tokenURI);
       _mint(msg.sender, id);
       _setTokenURI(id, tokenURI);
 
       return id;
   }
 
-  function _updateInternalState() private returns (uint) {
+  function _updateInternalState(string tokenURI) private returns (uint) {
     // @dev Increment has to occur first
     _tokenIds.increment();
     // @dev Current id must only be retrieved after counter increment from above.
