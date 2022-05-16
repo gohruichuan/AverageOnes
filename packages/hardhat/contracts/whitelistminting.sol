@@ -7,9 +7,11 @@ import "./WhitelistMintHelper.sol";
 contract WhitelistMinting is WhitelistHelper {
 
   function mintItem(string memory tokenURI) 
-    public 
-    allowedToMint
+    public
+    payable
     isForSale(tokenURI)
+    allowedToMint
+    metMintPurchaseFee
     returns (uint)
   {
       uint id = _getNewTokenId();

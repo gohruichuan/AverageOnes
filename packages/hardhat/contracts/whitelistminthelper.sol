@@ -8,6 +8,8 @@ contract WhiteListMintHelper is WhitelistHelper {
   using Counters for Counters.Counter;
   Counters.Counter internal _tokenIds;
 
+  uint mintPurchaseFee = 0.01 ether;
+
   constructor(bytes32[] memory assetsForSale) public ERC721("YourCollectible", "YCB") {
     _setBaseURI("https://ipfs.io/ipfs/");
     for(uint256 i=0;i<assetsForSale.length;i++){
@@ -26,8 +28,17 @@ contract WhiteListMintHelper is WhitelistHelper {
     _;
   }
 
+  modifier metMintPurchaseFee() {
+    require(msg.value >= mintPurchaseFee, "INSUFFICIENT ETHER");
+    _;
+  }
+
   function _decreaseMintCountOfMinterFromWhitelistAfterMinting() internal {
     _whitelist[msg.sender] = _whitelist[msg.sender].sub(1);
+  }
+
+  function setMintPurchaseFee(uint _fee) external onlyOwner {
+    mintPurchaseFee = _fee;
   }
 
 }
