@@ -8,7 +8,7 @@ contract WhitelistMinting is WhitelistHelper {
 
   function mintItem(string memory tokenURI) 
     public 
-    allowedToMint(msg.sender) 
+    allowedToMint
     isForSale(tokenURI)
     returns (uint)
   {

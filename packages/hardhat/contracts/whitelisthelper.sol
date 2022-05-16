@@ -11,9 +11,9 @@ contract WhitelistHelper is ERC721 {
   // Whitelisted address to number of tokens allowed for minting
   mapping(address => uint8) internal _whitelist;
 
-  modifier allowedToMint(address minter) {
+  modifier allowedToMint() {
       require(_whitelistActive, "WHITELIST NOT ACTIVE");
-      require(_whitelist[minter] > 0, "PURCHASE NOT ALLOWED");
+      require(_whitelist[msg.sender] > 0, "PURCHASE NOT ALLOWED");
       _;
   }
 
