@@ -25,7 +25,7 @@ contract WhitelistMinting is WhitelistHelper {
     // @dev Current id must only be retrieved after counter increment from above.
     uint id = _tokenIds.current();
     bytes32 uriHash = keccak256(abi.encodePacked(tokenURI));
-    forSale[uriHash]=false;
+    forSale[uriHash] = false;
     uriToTokenId[uriHash] = id;
     _decreaseMintCountOfMinterFromWhitelistAfterMinting();
     return id;
