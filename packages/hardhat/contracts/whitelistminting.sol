@@ -1,0 +1,36 @@
+pragma solidity ^0.8.0;
+
+import "./WhitelistMintHelper.sol";
+
+contract WhitelistMinting is WhitelistHelper {
+
+  function mintItem(string memory tokenURI) 
+    public
+    payable
+    isForSale(tokenURI)
+    allowedToMint
+    metMintPurchaseFee
+    returns (uint)
+  {
+      uint id = _getNewTokenId();
+      _mint(msg.sender, id);
+      _setTokenURI(id, tokenURI);
+      _updateInternalStateAfterMinting();
+      return id;
+  }
+
+  function _getNewTokenId() private returns (uint) {
+    // @dev Increment has to occur first
+    _tokenIds.increment();
+    // @dev Current id must only be retrieved after counter increment from above.
+    return _tokenIds.current();
+  }
+
+  function _updateInternalStateAfterMinting(string tokenURI) private {
+    bytes32 uriHash = toURIHash(tokenURI);
+    forSale[uriHash] = false;
+    uriToTokenId[uriHash] = id;
+    _decreaseMintCountOfMinterFromWhitelistAfterMinting();
+  }
+
+}
