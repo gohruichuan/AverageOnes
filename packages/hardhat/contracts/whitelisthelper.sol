@@ -17,8 +17,12 @@ contract WhitelistHelper is ERC721 {
       _;
   }
 
-  function toggleWhitelistActive() external onlyOwner {
-      _whitelistActive = !_whitelistActive;
+  function setWhitelistActive() external onlyOwner {
+      _whitelistActive = true;
+  }
+
+  function setWhitelistInactive() external onlyOwner {
+      _whitelistActive = false;
   }
 
   function setWhitelist(address[] calldata addresses, uint8 mintCountAllowed) external onlyOwner {
