@@ -19,7 +19,7 @@ contract WhitelistMinting is WhitelistHelper {
       return id;
   }
 
-  function _updateInternalState(string tokenURI) private returns (uint) {
+  function _updateInternalStateForNewTokenId(string tokenURI) private returns (uint) {
     // @dev Increment has to occur first
     _tokenIds.increment();
     // @dev Current id must only be retrieved after counter increment from above.
